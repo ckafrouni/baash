@@ -24,5 +24,3 @@ jobs:
         with:
           files: |
             build/baash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
