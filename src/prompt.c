@@ -5,8 +5,19 @@
 
 #include "colorize.h"
 #include "prompt.h"
+#include "project.h"
 
-void prompt(char *buf, size_t size)
+void print_welcome_msg(void)
+{
+    printf("/**\n");
+    printf(" * " YELLOW(BOLD("Baash")) " " BOLD("shell ") "\n");
+    printf(" * " MAGENTA(BOLD("v%s")) "\n", VERSION);
+    printf(" * \n");
+    printf(" * " BOLD(AUTHOR) "\n");
+    printf(" */\n");
+}
+
+void print_prompt(void)
 {
     char cwd[1024];
     if (getcwd(cwd, sizeof(cwd)) == NULL)
@@ -18,10 +29,10 @@ void prompt(char *buf, size_t size)
     char *dirname = strrchr(cwd, '/');
 
     if (dirname != NULL)
-        snprintf(buf, size, MAGENTA(BOLD("%s")), dirname + 1);
+        printf(MAGENTA(BOLD("%s")), dirname + 1);
     else
-        snprintf(buf, size, MAGENTA(BOLD("%s")), cwd);
+        printf(MAGENTA(BOLD("%s")), cwd);
 
     // Add PROMPT
-    strncat(buf, YELLOW(BOLD(PROMPT)), size - strlen(buf) - 1);
+    printf(YELLOW(BOLD(PROMPT)));
 }

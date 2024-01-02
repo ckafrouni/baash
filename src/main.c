@@ -1,23 +1,26 @@
-/**
- * @file main.c
- * @author Christophe Kafrouni (contact@ckaf.dev)
- * @brief Basic implementation of a bash like shell
- * @version 0.1
- * @date 2024-01-02
- *
- * @copyright Copyright (c) 2024
- *
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include "colorize.h"
 #include "prompt.h"
 #include "cmd_processor.h"
 
-#define VERSION "0.0.1"
+void handle_signal(int signal)
+{
+    if (signal == SIGINT)
+    {
+        printf(RESET "\n");
+        exit(EXIT_SUCCESS);
+    }
+}
+
+#define BUFFER_SIZE 1024
+
+char welcome_buf[BUFFER_SIZE];
+char prompt_buf[BUFFER_SIZE];
 
 int main(int argc, char *argv[])
 {
@@ -29,23 +32,18 @@ int main(int argc, char *argv[])
 
     (void)argv;
 
-    printf("/**\n");
-    printf(" * " YELLOW(BOLD("Baash")) " " BOLD("shell ") "\n");
-    printf(" * " MAGENTA(BOLD("v%s")) "\n",
-           VERSION);
-    printf(" * " BOLD("ckafrouni ;)") "\n");
-    printf(" */\n\n");
-
-    char prompt_buf[1024];
+    print_welcome_msg();
 
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
 
+    signal(SIGINT, handle_signal);
+
     while (1)
     {
-        prompt(prompt_buf, sizeof(prompt_buf));
-        printf("%s", prompt_buf);
+        printf("\n");
+        print_prompt();
 
         printf("\033[36m");
         read = getline(&line, &len, stdin);
@@ -58,7 +56,6 @@ int main(int argc, char *argv[])
         fflush(stdout);
 
         process_cmd(line);
-        printf("\n");
     }
 
     exit(EXIT_SUCCESS);

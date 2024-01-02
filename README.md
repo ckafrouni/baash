@@ -37,12 +37,34 @@ make run # or ./build/baash
 
 ## Features
 
-- `cd <path>`: Change the current directory to `<path>`.
+### Builtins
+
+Baash supports the following builtin commands:
+
+- `cd`: Change the current directory to `<path>`.
 - `exit`: Exit the shell.
 - `clear`: Clear the terminal screen.
 - `pwd`: Print the current working directory.
 
+### Program Execution
+
+Baash supports executing programs in the current working directory. To execute a program, simply type the name of the program and press enter. Baash will spawn a child process to execute the program.
+
+- `<program>`: Looks for the program in the `PATH` environment variable.
+- `./<program>`: Looks for the program in the current working directory.
+
 ## Todo
 
+### Builtin Commands and Execution
+
 - `./<program>`: spawn a child process to execute the program.
-- `cd`: Change the current directory to `$HOME`
+- `history`: builtin cmd, and read/write on shell start/close.
+- `cd`: Change the current directory to `$HOME`.
+- `environment variables`: support for environment variables.
+
+### Other Features
+
+- `raw mode`: sets the terminal to raw mode, and supports arrow keys, backspace, and delete.
+- `colorize the input`: colorize and validate the input as the user types it.
+- `configurable prompt`: allow the user to configure the prompt.
+- `configuration file`: allow the user to configure the shell via a configuration file. (.baash.cfg?)
