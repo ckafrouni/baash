@@ -32,6 +32,6 @@ $(BUILD_DIR):
 clean:
 	rm -rf build
 
-run: ARGS := Hello, World !
+# run: ARGS := Hello, World !
 run: all
 	@./$(EXEC) $(ARGS)
