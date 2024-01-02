@@ -24,6 +24,7 @@
 #define BOLD(str) "\033[1m" str RESET
 #define UNDERLINE(str) "\033[4m" str RESET
 
-#define CLEAR() printf("\033[2J")
+#define CLEAR "\033[2J"
+#define CURSOR_TO_ORIGIN "\033[H"
 
 #endif // __COLORIZE_H__

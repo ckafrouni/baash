@@ -11,31 +11,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "colorize.h"
 #include <unistd.h>
 
-#define PROMPT MAGENTA(BOLD("baash> "))
+#include "colorize.h"
+#include "prompt.h"
+#include "cmd_processor.h"
 
-void process(char *line)
-{
-    if (strcmp(line, "exit\n") == 0)
-    {
-        printf(BLUE("Exiting...") "\n");
-        exit(EXIT_SUCCESS);
-    }
-    printf(YELLOW(BOLD("Processing: ")) UNDERLINE("%s") "\n", line);
-}
+#define VERSION "0.0.1"
 
 int main(int argc, char *argv[])
 {
     if (argc != 1)
     {
         fprintf(stderr, RED("USAGE ") "%s\n", argv[0]);
-        return (EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     (void)argv;
+
+    printf("/**\n");
+    printf(" * " YELLOW(BOLD("Baash")) " " BOLD("shell ") "\n");
+    printf(" * " MAGENTA(BOLD("v%s")) "\n",
+           VERSION);
+    printf(" * " BOLD("ckafrouni ;)") "\n");
+    printf(" */\n\n");
+
+    char prompt_buf[1024];
 
     char *line = NULL;
     size_t len = 0;
@@ -43,16 +44,22 @@ int main(int argc, char *argv[])
 
     while (1)
     {
-        printf(PROMPT);
+        prompt(prompt_buf, sizeof(prompt_buf));
+        printf("%s", prompt_buf);
+
+        printf("\033[36m");
         read = getline(&line, &len, stdin);
         if (read == -1)
         {
             printf("\n");
             break;
         }
+        printf(RESET);
+        fflush(stdout);
 
-        process(line);
+        process_cmd(line);
+        printf("\n");
     }
 
-    return (EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }

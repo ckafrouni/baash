@@ -1,1 +1,5 @@
+# Build outputs
 build/
+
+# Editors
+# .vscode
