@@ -19,9 +19,8 @@ jobs:
       - name: Build project
         run: make all
 
-      - name: Release with build artifact
+      - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/**
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            build/baash
