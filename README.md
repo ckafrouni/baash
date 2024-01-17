@@ -2,6 +2,8 @@
 
 Baash is a basic implementation of a bash-like shell. It supports a few basic builtin commands like `cd`, `exit`, `clear`, and `pwd`.
 
+> :warning: **Warning**: This project is for educational purposes only and is not intended for production use.
+
 ## Example
 
 Here is an example of how to use Baash:
