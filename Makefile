@@ -1,12 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -ggdb -O2 -I$(INCLUDE_DIR)
-LDFLAGS = -lpthread
+LDFLAGS = -lpthread -L$(LIB_DIR) -ltoml
 
 SRC_DIR := src
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 
 INCLUDE_DIR := include
-# INCLUDES := $(wildcard $(INCLUDE_DIR)/*.h) (potentially not needed)
+LIB_DIR := lib
 
 BUILD_DIR := build
 OBJS_DIR := $(BUILD_DIR)/obj

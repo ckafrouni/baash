@@ -4,23 +4,13 @@
 #include <unistd.h>
 #include <signal.h>
 
+#include "toml.h"
+#include "config.h"
 #include "colorize.h"
 #include "prompt.h"
 #include "cmd_processor.h"
 
-void handle_signal(int signal)
-{
-    if (signal == SIGINT)
-    {
-        printf(RESET "\n");
-        exit(EXIT_SUCCESS);
-    }
-}
-
 #define BUFFER_SIZE 1024
-
-char welcome_buf[BUFFER_SIZE];
-char prompt_buf[BUFFER_SIZE];
 
 int main(int argc, char *argv[])
 {
@@ -32,31 +22,38 @@ int main(int argc, char *argv[])
 
     (void)argv;
 
-    print_welcome_msg();
+    // Load config
+    char *config_path = "./bush.toml";
+    config_t *config = load_config(config_path);
 
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
+    print_config(config);
+    print_colored(config->welcome_msg);
 
-    signal(SIGINT, handle_signal);
+    print_colored("{B;MA;B_BLU:Bush} ++ {B:- Barelly Usable Shell}");
 
-    while (1)
-    {
-        printf("\n");
-        print_prompt();
+    // print_welcome_msg();
 
-        printf("\033[36m");
-        read = getline(&line, &len, stdin);
-        if (read == -1)
-        {
-            printf("\n");
-            break;
-        }
-        printf(RESET);
-        fflush(stdout);
+    // char *line = NULL;
+    // size_t len = 0;
+    // ssize_t read;
 
-        process_cmd(line);
-    }
+    // while (1)
+    // {
+    //     printf("\n");
+    //     print_prompt();
+
+    //     printf("\033[36m");
+    //     read = getline(&line, &len, stdin);
+    //     if (read == -1)
+    //     {
+    //         printf("\n");
+    //         break;
+    //     }
+    //     printf(RESET);
+    //     fflush(stdout);
+
+    //     process_cmd(line);
+    // }
 
     exit(EXIT_SUCCESS);
 }

@@ -27,4 +27,14 @@
 #define CLEAR "\033[2J"
 #define CURSOR_TO_ORIGIN "\033[H"
 
+/**
+ * @brief Prints a Colorized string based on a custom format
+ *
+ * @example
+ * `{MB:Bush} {B:- Barelly Usable Shell}` -> `MAGENTA(BOLD("Bush")) BOLD("- Barelly Usable Shell")`
+ *
+ * @param formatted_str The string to be formatted
+ */
+void print_colored(char *formatted_str);
+
 #endif // __COLORIZE_H__

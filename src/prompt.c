@@ -5,15 +5,15 @@
 
 #include "colorize.h"
 #include "prompt.h"
-#include "project.h"
+#include "config.h"
 
 void print_welcome_msg(void)
 {
     printf("/**\n");
     printf(" * " YELLOW(BOLD("Baash")) " " BOLD("shell ") "\n");
-    printf(" * " MAGENTA(BOLD("v%s")) "\n", VERSION);
+    // printf(" * " MAGENTA(BOLD("v%s")) "\n", VERSION);
     printf(" * \n");
-    printf(" * " BOLD(AUTHOR) "\n");
+    // printf(" * " BOLD(AUTHOR) "\n");
     printf(" */\n");
 }
 
@@ -34,5 +34,5 @@ void print_prompt(void)
         printf(MAGENTA(BOLD("%s")), cwd);
 
     // Add PROMPT
-    printf(YELLOW(BOLD(PROMPT)));
+    // printf(YELLOW(BOLD(PROMPT)));
 }

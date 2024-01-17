@@ -1,0 +1,27 @@
+[general]
+name = "Bush"
+version = "0.0.1"
+author = "Chris. Kafrouni"
+
+[description]
+short = "Barelly Usable Shell"
+long = "This is a shell that is barely usable..."
+
+[messages]
+welcome = """
+/**
+ * {BM;U:Bush} {BL:- Barelly Usable Shell}
+ *
+ * This is a shell that is barely usable.
+ * {P:@V$VERSION}
+ * {P:@$AUTHOR}
+ */
+"""
+exit = "Arrivederci!"
+pre_builtin = "Baash: "
+
+[prompts]
+p1 = """
+{MB:$USER}{OB:@}{MB:$HOSTNAME} {WB-} {PB:$DIRNAME}
+{YB>>} 
+"""
